@@ -18,34 +18,33 @@ const updateResult = () => {
 const calculate = (result, operator, firstN, secondN) => {
     console.log("first", firstN);
     console.log("second", secondN);
-    console.log("result", result);
-
-    if (firstN && secondN && !result) {
+    if (firstN && secondN) {
         if (operator == "+") {
-            currentValue = Number(secondN) + Number(firstN);
+            currentValue = Number(firstN) + Number(secondN);
         } else if (operator === "-") {
-            currentValue = Number(secondN) - Number(firstN);
+            currentValue = Number(firstN) - Number(secondN);
         } else if (operator === "/") {
-            currentValue = Number(secondN) / Number(firstN);
+            currentValue = Number(firstN) / Number(secondN);
         } else if (operator === "*") {
-            currentValue = Number(secondN) * Number(firstN);
+            currentValue = Number(firstN) * Number(secondN);
         }
         calculation.firstNumber = "";
         calculation.secondNumber = "";
+
     } else if (result) {
         if (operator == "+") {
-            currentValue = Number(result) + Number(firstN);
+            currentValue = Number(result) + Number(firstNumber);
         } else if (operator === "-") {
-            currentValue = Number(result) - Number(firstN);
+            currentValue = Number(result) - Number(firstNumber);
         } else if (operator === "/") {
-            currentValue = Number(result) / Number(firstN);
+            currentValue = Number(result) / Number(firstNumber);
         } else if (operator === "*") {
-            currentValue = Number(result) * Number(firstN);
+            currentValue = Number(result) * Number(firstNumber);
         }
     }
     console.log("currentValue", currentValue)
+    calculation.display = currentValue;
     calculation.result = currentValue;
-    calculation.display = calculation.result;
     updateResult();
 };
 
@@ -54,27 +53,32 @@ buttons.forEach((item) => {
     item.addEventListener("click", (e) => {
         e.preventDefault();
         if (item.classList.contains('number')) {
-            if (calculation.value) {
+            console.log("Click on number", item.value);
+
+
+            if (!calculation.secondNumber) {
                 calculation.firstNumber += item.value;
-                calculation.display = item.value;
+                calculation.display += item.value;
+                updateResult();
+            } else {
+                // calculate(calculation.result, calculation.operator, calculation.firstNumber, calculation.secondNumber);
+                calculation.firstNumber += item.value;
+                calculation.display += item.value;
                 updateResult();
             }
-            calculation.firstNumber += item.value;
-            calculation.display += item.value;
-            updateResult();
 
         } else if (item.classList.contains('operator')) {
-            // if(!firstNumber && !result){do nothing}
-            if (!calculation.secondNumber) {
-                calculation.operator = item.value;
+            console.log("operator", item.value);
+            calculation.operator = item.value;
+
+            if (calculation.secondNumber || currentValue) {
+
+                calculate(calculation.result, calculation.operator, calculation.firstNumber, calculation.secondNumber);
+            } else {
                 calculation.secondNumber = calculation.firstNumber;
                 calculation.firstNumber = "";
                 calculation.display += item.value;
                 updateResult();
-            } else {
-                calculation.display += item.value;
-                updateResult();
-                calculate(calculation.result, calculation.operator, calculation.firstNumber, calculation.secondNumber);
             }
 
         } else if (item.classList.contains('clear')) {

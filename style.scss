@@ -50,6 +50,7 @@ button {
   color: #fff;
 }
 
+//Grids
 .calculator-buttons {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -61,9 +62,10 @@ button {
   background-color: #1a7926;
   color: #fff;
   height: 100%;
-  grid-area: 2/4/6;
+  grid-area: 2 / 4 / 6;
 }
 
+//Hover
 .clear:hover {
   background-color: #4078f0;
 }
@@ -76,6 +78,7 @@ button:hover {
   background-color: #cecece;
 }
 
+//Media querie
 @media screen and (min-width: 768px) {
   main {
     display: grid;
