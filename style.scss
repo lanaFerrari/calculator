@@ -17,9 +17,9 @@ main {
 }
 
 .calculator {
-  border: 1px solid #ccc;
   border-radius: 5px;
   width: 400px;
+  background-color: #252525;
 }
 
 .calculator-screen {
@@ -28,7 +28,7 @@ main {
   height: 120px;
   background-color: #252525;
   color: #fff;
-  text-align: right;
+  text-align: left;
   padding-right: 20px;
   padding-left: 10px;
 }
@@ -36,17 +36,18 @@ main {
 button {
   height: 60px;
   border-radius: 3px;
-  border: 1px solid #c4c4c4;
   font-size: 2rem;
-  color: #333;
+  color: #fff;
+  background-color: #252525;
 }
 
 .operator {
-  color: #337cac;
+  color: #fff;
+  background-color: rgb(245, 174, 94);
 }
 
 .clear {
-  background-color: #192eee;
+  background-color: #ee1919;
   color: #fff;
 }
 
@@ -59,7 +60,7 @@ button {
 }
 
 .equal {
-  background-color: #1a7926;
+  background-color: rgb(245, 174, 94);
   color: #fff;
   height: 100%;
   grid-area: 2 / 4 / 6;
