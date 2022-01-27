@@ -32,7 +32,7 @@ const calculate = (result, operator, firstN, secondN) => {
         }
         calculation.firstNumber = "";
         calculation.secondNumber = "";
-    } else if (result) {
+    } else if (currentValue) {
         if (operator == "+") {
             currentValue = Number(result) + Number(firstN);
         } else if (operator === "-") {
@@ -42,9 +42,11 @@ const calculate = (result, operator, firstN, secondN) => {
         } else if (operator === "*") {
             currentValue = Number(result) * Number(firstN);
         }
+        calculation.firstNumber = "";
     }
     console.log("currentValue", currentValue)
     calculation.result = currentValue;
+    console.log("result", calculation.result);
     calculation.display = calculation.result;
     updateResult();
 };
@@ -55,7 +57,7 @@ buttons.forEach((item) => {
         e.preventDefault();
         if (item.classList.contains('number')) {
             if (currentValue) {
-                calculation.firstNumber += item.value;
+                // calculation.firstNumber += item.value;
                 calculation.display = currentValue + calculation.operator;
                 updateResult();
             }
@@ -77,24 +79,28 @@ buttons.forEach((item) => {
                 calculate(calculation.result, calculation.operator, calculation.firstNumber, calculation.secondNumber);
             }
 
-        } else if (item.classList.contains('clear')) {
+        } else if (item.classList.contains("clear")) {
             calculation = {
                 display: "",
                 firstNumber: "",
+                secondNumber: "",
                 operator: "",
                 result: "",
             };
+            currentValue = "";
             updateResult();
         } else if (item.classList.contains('equal')) {
 
-            calculate(calculation.result, calculation.operator, calculation.firstNumber, calculation.secondNumber);
+            calculate(currentValue, calculation.operator, calculation.firstNumber, calculation.secondNumber);
 
             calculation = {
                 display: "",
                 firstNumber: "",
+                secondNumber: "",
                 operator: "",
                 result: "",
             };
+            currentValue = "";
         }
     });
 });
