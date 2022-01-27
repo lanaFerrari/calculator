@@ -33,7 +33,7 @@ var calculate = function calculate(result, operator, firstN, secondN) {
 
     calculation.firstNumber = "";
     calculation.secondNumber = "";
-  } else if (result) {
+  } else if (currentValue) {
     if (operator == "+") {
       currentValue = Number(result) + Number(firstN);
     } else if (operator === "-") {
@@ -43,10 +43,13 @@ var calculate = function calculate(result, operator, firstN, secondN) {
     } else if (operator === "*") {
       currentValue = Number(result) * Number(firstN);
     }
+
+    calculation.firstNumber = "";
   }
 
   console.log("currentValue", currentValue);
   calculation.result = currentValue;
+  console.log("result", calculation.result);
   calculation.display = calculation.result;
   updateResult();
 };
@@ -56,9 +59,15 @@ buttons.forEach(function (item) {
     e.preventDefault();
 
     if (item.classList.contains('number')) {
-      if (calculation.value) {
-        calculation.firstNumber += item.value;
-        calculation.display = item.value;
+      if (currentValue && !calculation.firstNumber) {
+        console.log("firstCase");
+        calculation.display = currentValue + calculation.operator;
+        calculate(currentValue, calculation.operator, calculation.firstNumber, calculation.secondNumber);
+        updateResult();
+      } else if (currentValue && calculation.firstNumber) {
+        console.log("secondcase");
+        calculation.display = currentValue + calculation.operator;
+        calculate(currentValue, calculation.operator, calculation.firstNumber, calculation.secondNumber);
         updateResult();
       }
 
@@ -66,6 +75,7 @@ buttons.forEach(function (item) {
       calculation.display += item.value;
       updateResult();
     } else if (item.classList.contains('operator')) {
+      // if(!firstNumber && !result){do nothing}
       if (!calculation.secondNumber) {
         calculation.operator = item.value;
         calculation.secondNumber = calculation.firstNumber;
@@ -75,24 +85,28 @@ buttons.forEach(function (item) {
       } else {
         calculation.display += item.value;
         updateResult();
-        calculate(calculation.result, calculation.operator, calculation.firstNumber, calculation.secondNumber);
+        calculate(currentValue, calculation.operator, calculation.firstNumber, calculation.secondNumber);
       }
-    } else if (item.classList.contains('clear')) {
+    } else if (item.classList.contains("clear")) {
       calculation = {
         display: "",
         firstNumber: "",
+        secondNumber: "",
         operator: "",
         result: ""
       };
+      currentValue = "";
       updateResult();
     } else if (item.classList.contains('equal')) {
-      calculate(calculation.result, calculation.operator, calculation.firstNumber, calculation.secondNumber);
+      calculate(currentValue, calculation.operator, calculation.firstNumber, calculation.secondNumber);
       calculation = {
         display: "",
         firstNumber: "",
+        secondNumber: "",
         operator: "",
         result: ""
       };
+      currentValue = "";
     }
   });
 });
