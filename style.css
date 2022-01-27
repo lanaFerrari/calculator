@@ -59,18 +59,18 @@ button {
 }
 
 .equal {
-  background-color: #f5ae5e;
+  background-color: #4280f3;
   color: #fff;
   height: 100%;
   grid-area: 2/4/6;
 }
 
 .clear:hover {
-  background-color: #4078f0;
+  background-color: #f14a34;
 }
 
 .equal:hover {
-  background-color: #5ec494;
+  background-color: #6192ec;
 }
 
 button:hover {
