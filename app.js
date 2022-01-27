@@ -54,9 +54,9 @@ buttons.forEach((item) => {
     item.addEventListener("click", (e) => {
         e.preventDefault();
         if (item.classList.contains('number')) {
-            if (calculation.value) {
+            if (currentValue) {
                 calculation.firstNumber += item.value;
-                calculation.display = item.value;
+                calculation.display = currentValue + calculation.operator;
                 updateResult();
             }
             calculation.firstNumber += item.value;
