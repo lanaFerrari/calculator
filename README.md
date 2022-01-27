@@ -1,5 +1,5 @@
 # Javascript Challenge - Calculator
-- HTML and SCSS
+- HTML and SCSS/CSS
 - Javascript
 - DOM
 
