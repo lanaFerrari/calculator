@@ -56,9 +56,15 @@ buttons.forEach((item) => {
     item.addEventListener("click", (e) => {
         e.preventDefault();
         if (item.classList.contains('number')) {
-            if (currentValue) {
-                // calculation.firstNumber += item.value;
+            if (currentValue && !calculation.firstNumber) {
+                console.log("firstCase")
                 calculation.display = currentValue + calculation.operator;
+                calculate(currentValue, calculation.operator, calculation.firstNumber, calculation.secondNumber);
+                updateResult();
+            } else if (currentValue && calculation.firstNumber) {
+                console.log("secondcase")
+                calculation.display = currentValue + calculation.operator;
+                calculate(currentValue, calculation.operator, calculation.firstNumber, calculation.secondNumber);
                 updateResult();
             }
             calculation.firstNumber += item.value;
@@ -76,7 +82,7 @@ buttons.forEach((item) => {
             } else {
                 calculation.display += item.value;
                 updateResult();
-                calculate(calculation.result, calculation.operator, calculation.firstNumber, calculation.secondNumber);
+                calculate(currentValue, calculation.operator, calculation.firstNumber, calculation.secondNumber);
             }
 
         } else if (item.classList.contains("clear")) {
