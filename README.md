@@ -1,4 +1,9 @@
 # Javascript Challenge - Calculator
+## About
+Calculator built completely in Javascript. The end goal here is to have a site which can accept inputs, do some calculations and give you 
+the outputs. The inputs will be generated from users clicking on the calculator buttons.
+
+## Tech
 - HTML and SCSS/CSS
 - Javascript
 - DOM
